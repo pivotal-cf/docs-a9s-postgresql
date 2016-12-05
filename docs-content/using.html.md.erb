@@ -1,0 +1,143 @@
+---
+title: Using the a9s PostgreSQL for PCF
+owner: Partners
+---
+
+This topic describes how to use a9s PostgreSQL for Pivotal Cloud Foundry (PCF) after it has been successfully installed. For more information, see [Installing and Configuring PostgreSQL for PCF](./installing.html).
+
+##<a id='using'></a> Use a9s PostgreSQL for PCF With an App
+
+To use the a9s PostgreSQL for PCF with with an
+app, follow the procedures in this section to create a service instance and bind the service instance
+to your app. For more information on managing service instances, see <a href="https://docs.cloudfoundry.org/devguide/services/managing-services.html" target="_blank">Managing Service 
+Instances with the CLI</a>.
+
+### <a id="list"></a>View the Service
+
+
+After the tile is installed, `a9s-postgresql` and its service
+plans appear in your PCF marketplace. Run `cf marketplace` to
+see the service listing:
+
+<pre class="terminal">
+$ cf marketplace
+Getting services from marketplace in org test / space test as admin...
+OK
+
+service            plans                                                                                              description
+a9s-postgresql     postgresql-single-small, postgresql-cluster-small, postgresql-single-big, postgresql-cluster-big   This is the anynines PostgreSQL 9.4 service.
+</pre>
+
+See the next section for instructions on creating PostgreSQL service instances based on the plans listed in the `cf marketplace` output. 
+
+
+### <a id="create"></a> Create a Service Instance
+
+You can provision a database with the `cf create-service`. 
+
+The following example creates a `postgresql-single-small` service that provisions a single VM PostgreSQL server. In contrast, the `cluster` service plans provision PostgreSQL clusters consisting of 3 virtual machines. 
+
+<pre class="terminal">
+$ cf create-service a9s-postgresql postgresql-single-small my-postgresql-service
+</pre>
+
+Depending on your infrastructure and service broker usage, it may take several minutes to create the service instance.
+
+Check the creation status using `cf services`. This displays a list of all your service instances. To check the status of a specific service instance, run `cf service NAME-OF-YOUR-SERVICE`.
+
+
+### <a id="bind"></a>Bind the Service Instance to an App
+
+After you create your database, run
+`cf bind-service` to bind the service to your app:
+
+<pre class="terminal">
+$ cf bind-service a9s-postgresql-app my-postgresql-service                
+</pre>
+
+### <a id="restart"></a>Restage or Restart Your App
+
+To enable your application to access the service instance, run `cf restage` or `cf restart` to restage or restart your application.
+
+### <a id="obtain"></a>Obtain Service Instance Access Credentials
+
+After you bind your service instance to your app, you can find the credentials of your PostgreSQL
+database in the environment variables of the app. 
+
+Run `cf env APP-NAME` to display environment variables. The credentials are listed under
+the <a href="https://docs.cloudfoundry.org/devguide/deploy-apps/environment-variable.html#VCAP-SERVICES" target="_blank">VCAP_SERVICES</a> key.
+
+<pre class="terminal">
+$ cf env a9s-postgresql-app
+Getting env variables for app a9s-postgresql-app in org test / space test as admin...
+OK
+
+System-Provided:
+{
+ "VCAP_SERVICES": {
+  "a9s-postgresql": [
+   {
+    "credentials": {
+     "host": "EXAMPLE-HOST",
+     "name": "d92e2bd",
+     "password": "EXAMPLE-PASSWORD",
+     "port": 5432,
+     "uri": "EXAMPLE-URI",
+     "username": "EXAMPLE-USERNAME"
+    },
+    "label": "a9s-postgresql",
+    "name": "my-postgresql-service",
+    "plan": "postgresql-cluster-small",
+    "tags": [
+     "sql",
+     "database"
+    ]
+   }
+  ]
+ }
+}
+...
+</pre>
+
+You can use the host, username, and
+password values with a PostgreSQL client to connect to the database.
+
+##<a id='deleting'></a> Delete a a9s PostgreSQL for PCF Service Instance
+
+<p class="note"><strong>Note</strong>: Before deleting a service instance, you must backup data stored in your database. This operation cannot be undone and all the data is be lost when the service is deleted.</p>
+
+Follow the instructions below to unbind your service instance from all apps and delete it.
+
+### <a id="list2"></a>List Available Services
+
+Run `cf service` to list your available services.
+
+<pre class="terminal">
+$ cf service
+
+Getting services in org test / space test as admin...
+OK
+
+name                    service          plan                      bound apps           last operation
+my-postgresql-service   a9s-postgresql   postgresql-single-small   a9s-postgresql-app   create succeeded
+</pre>
+
+This example shows that `my-postgresql-service` is bound to the `a9s-postgresql-app` app.
+
+### <a id="unbind"></a>Unbind a Service Instance 
+
+Run `cf unbind` to unbind the service from your app.
+
+<pre class="terminal">
+$ cf unbind-service a9s-postgresql-app my-postgresql-service
+</pre>
+
+
+### <a id="delete"></a>Delete a Service Instance
+
+Run `cf delete-service` to delete the service.
+
+<pre class="terminal">
+$ cf delete-service my-postgresql-service                                      </pre>
+
+It may take several minutes to delete the service. Deleting a service deprovisions the corresponding infrastructure resources. Run the `cf services` command to check the deletion status.

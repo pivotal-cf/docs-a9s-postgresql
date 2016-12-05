@@ -1,0 +1,68 @@
+---
+title: a9s PostgreSQL for PCF service
+owner: Partners
+---
+
+This documentation describes the a9s PostgreSQL for Pivotal Cloud Foundry (PCF) tile. 
+
+![a9s PostgreSQL for PCF logo](a9s-postgresql.png)
+
+## <a id='overview'></a>Overview 
+
+a9s PostgreSQL for PCF enables on-demand provisioning of VM based, dedicated PostgreSQL servers and clusters. Developers can create instances of a PostgreSQL server or cluster using Apps Manager or the Cloud Foundry Command Line interface (cf CLI) and bind these instances to an application.  Depending on the chosen service plan, a service
+instance may be associated with a single, dedicated virtual machine or a set of VMs consisting of multiple virtual machines comprising a cluster of PostgreSQL servers. 
+
+### <a id="current"></a>Current Features
+
+a9s PostgreSQL for PCF includes the following key features:
+
+| Feature | Benefits |
+|---|---|
+| **On&dash;demand Service Instance Provisioning** | <ul><li>Fully automated deployment of PostgreSQL. Developers can provision a single VM PostgreSQL server or a multi VM PostgreSQL cluster with a single command.</li><li>Only existing service instances allocate infrastructure resources, which are released when you delete the service instance.</li><li>The number of service instances is not limited by design.</li></ul>|
+| **Service Instance Isolation** | <ul><li>Each PostgreSQL server runs on a **dedicated virtual machine** to ensure **bad neighborhood protection** and align with enterprise security requirements.</li><li>Cloud Foundry **security groups** ensure that **only authorized applications** connect to service instances.</li></ul>
+| **High Availability** | <ul><li>The [Replication Manager for PostgreSQL](http://repmgr.org/) ensures high availability.</li><li>**Consul based internal DNS** delivered by a9s Consul DNS for PCF ensures that the connected app always connects to a working node.</li><li>The clustered data service plans are **spread across several infrastructure availability zones**, which enables very **short failover times** and a **strong resilience against failures** of individual infrastructure hosts or even entire availability zones.</li>|
+
+### <a id="upcoming"></a>Upcoming Features
+
+The following features have already been developed and tested on <a href="https://paas.anynines.com/" target="_blank">paas.anynines.com</a>.
+These features will be included in upcoming a9s PostgreSQL for PCF tile releases:
+
+| Feature | Benefits |
+|---|---|
+| **On&dash;demand Encrypted Remote Connectivity** | You can establish a **private encrypted tunnel** to your service instance **on&dash;demand**. Developers can use this connection to perform manual backups. As soon as the public connection is obsolete, you can terminate the tunnel to prevent further access. An additional component, the Service Jumper Module, provides this functionality. |
+| **Service Instance Capacity Upgrade** | You can **upgrade of the RAM, CPU and storage capacity** for your PostgreSQL instances. |
+| **Logging and Monitoring** | Each PostgreSQL service instance **delivers log messages** and PostgreSQL-specific **metrics** to one or more **syslog/graphite** endpoints. Developers can configure the syslog/graphite endpoint to receive this data. |
+
+## <a id="snapshot"></a>Product Snapshot
+
+<dl>
+<dt>a9s PostgreSQL for PCF Details:</dt>
+<dd><strong>Version</strong>: v0.9.0 </dd>
+<dd><strong>Release Date</strong>: December 1, 2016</dd>
+<dd><strong>Compatible Ops Manager Versions:</strong> 1.7.x</dd>
+<dd><strong>Compatible Elastic Runtime Versions:</strong> 1.7.x, 1.8.x</dd>
+<dd><strong>vSphere support?</strong> Yes</dd>
+</dl>
+
+## <a id="reqs"></a>Requirements
+
+To install and use a9s MongoDB for PCF, you must install the following products and tiles:
+
+* Elastic Runtime 1.7 or 1.8
+* a9s Consul DNS for PCF 0.9.0
+* a9s BOSH for PCF 0.9.0
+
+For more information, see [Installing and Configuring a9s PostgreSQL for PCF](./installing.html).
+
+## <a id="feedback"></a>Feedback and Support
+
+a9s PostgreSQL for PCF is an automation toolset for Open Source PostgreSQL. The entire anynines team can help your team get started and be successful. Technical support, including a service level agreement, is available with a commercial license.
+
+If your company has specific PostgreSQL administration policies or configuration best practices, the anynines team is happy to incorporate them, 
+if applicable. Third-party party PostgreSQL support organizations are also welcome to assist. 
+
+Contributions are welcome and will be investigated by the anynines team. Send any bugs, feature requests, or questions to svc.support@anynines.com.
+
+## <a id='license'></a>License
+
+Contact the [anynines sales team](http://data-services.anynines.com/sales) to learn more about commercial licenses and support.
