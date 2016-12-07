@@ -35,7 +35,7 @@ to upload the product file.
 
 ##<a id="configure-service-instance"></a> Configure Service Plan VMs
 
-You can configure the dimensions of the VMs used to provision *service instances* of a given *service plan* in the **Iaas Settings** pane of the _a9s BOSH for PCF_ tile.
+You can configure the dimensions of the VMs used to provision *service instances* of a given *service plan* in the **IaaS Settings** pane of the a9s BOSH for PCF tile.
 
 The following table describes which [Cloud-Config fields](http://docs.pivotal.io/a9s-bosh/installing.html#cloud-config) in the a9s BOSH for PCF tile correspond to which a9s PostgreSQL for PCF service plans.
 
@@ -60,13 +60,13 @@ The following table describes which [Cloud-Config fields](http://docs.pivotal.io
 			<code>postgresql-cluster-big</code>
 		</td>
 		<td>
-			<b>Cloud properties fo the VM Type Big</b><br /> 
-			<b>Cloud properties fo the Disk Type Big</b>
+			<b>Cloud properties of the VM Type Big</b><br /> 
+			<b>Cloud properties of the Disk Type Big</b>
 		</td>
 	</tr>
 </table>
 
- See [About Configuring a9s BOSH for PCF](http://docs.pivotal.io/a9s-bosh/installing.html#configure) for more information on how to set VM dimensions.
+See [About Configuring a9s BOSH for PCF](http://docs.pivotal.io/a9s-bosh/installing.html#configure) for more information on how to set VM dimensions.
 
 ##<a id='configure'></a> Configure a9s PostgreSQL for PCF
 
@@ -75,60 +75,42 @@ The following sections describe the optional configuration panes in the a9s Post
 ### <a id='errands'></a>Errands
 
 The **Errands** pane lists <a href="https://bosh.io/docs/terminology.html#errand" target="_blank">
-BOSH errands</a> executed by the tile. See the following table for information on what each errand does and guidance for activating or deactivating each errand. 
+BOSH errands</a> executed by the tile. See the following table for information about what each errand does, and guidance for activating or deactivating each errand. 
 
 <table>
-	<tr>
-		<th>Errand</th>
-		<th>Description</th>
-	</tr>
-	<tr>
-		<td>Run BOSH Configurator</td>
-		<td>
-			Uploads the stemcells required
-			for the BOSH release so that a9s BOSH for PCF can provision PostgreSQL instances. Deactivating this errand may speed up the
-			deployment of tiles.
-
-			<p class="note"><strong>Note</strong>: 
-			Pivotal recommends leaving this errand selected to keep the tile configuration up-to-date.
-			</p>
-		</td>
-	</tr>
-	<tr>
-		<td>Run Template Uploader</td>
-		<td>
-			Applies PostgreSQL specific configurations to generic components of a9s PostgreSQL for PCF. This errand must run at least once. Deactivating this errand may speed up the deployment of tiles.
-
-			<p class="note"><strong>Note</strong>: 
-			Pivotal recommends leaving this errand selected to keep the tile configuration up-to-date.
-			</p>
-		</td>
-	</tr>
-	<tr>
-		<td>Run Broker Registrar</td>
-		<td>
-			Registers the a9s PostgreSQL for PCF service broker
-			with Elastic Runtime to make the service available in the
-			marketplace.
-		</td>
-	</tr>
-	<tr>
-		<td>Run Broker Deregistrar</td>
-		<td>
-			Deregisters the a9s PostgreSQL for PCF service broker with Elastic Runtime
-			and removes the service from the marketplace.
-		</td>
-	</tr>
-
+  <tr>
+    <th>Errand</th>
+    <th>Description</th>
+  </tr>
+  <tr>
+    <td>Run BOSH Configurator</td>
+    <td>Uploads the stemcells required for the BOSH release so that a9s BOSH for PCF can provision PostgreSQL instances. Deactivating this errand may speed up the deployment of tiles.
+      <p class="note"><strong>Note</strong>: Pivotal recommends leaving this errand selected to keep the tile configuration up-to-date.</p>
+    </td>
+  </tr>
+  <tr>
+    <td>Run Template Uploader</td>
+    <td>Applies PostgreSQL-specific configurations to generic components of a9s PostgreSQL for PCF. This errand must run at least once. Deactivating this errand may speed up the deployment of tiles.
+      <p class="note"><strong>Note</strong>: Pivotal recommends leaving this errand selected to keep the tile configuration up-to-date.</p>
+    </td>
+  </tr>
+  <tr>
+    <td>Run Broker Registrar</td>
+    <td>Registers the a9s PostgreSQL for PCF service broker with Elastic Runtime to make the service available in the marketplace.
+    </td>
+  </tr>
+  <tr>
+    <td>Run Broker Deregistrar</td>
+    <td>Deregisters the a9s PostgreSQL for PCF service broker with Elastic Runtime and removes the service from the marketplace.
+    </td>
+  </tr>
 </table>
 
 ###<a id='resource-config'></a> Resource Config
 
-You can configure the dimensions of the VMs that host the a9s PostgreSQL for PCF components. This configuration does not cover the dedicated PostgreSQL instances that run on VMs provided by the a9s BOSH tile for PCF. See [Configure Service Plan VMs](#configure-service-instance) for more information.
+You can configure the dimensions of the VMs that host the a9s PostgreSQL for PCF components. This configuration does not cover the dedicated PostgreSQL instances that run on VMs provided by the a9s BOSH tile for PCF. See the [Configure Service Plan VMs](#configure-service-instance) topic for more information.
 
-<p class="note"><strong>Note</strong>: 
-Pivotal recommends using a <b>VM Type</b> of <code>large</code> or greater to support the tile compilation.
-</p>
+<p class="note"><strong>Note</strong>: Pivotal recommends using a VM Type of large or greater to support the tile compilation.</p>
 
 ###<a id='stemcell'></a>Stemcell
 
