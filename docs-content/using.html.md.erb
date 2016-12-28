@@ -5,7 +5,7 @@ owner: Partners
 
 This topic describes how to use a9s PostgreSQL for Pivotal Cloud Foundry (PCF) after it has been successfully installed. For more information, see [Installing and Configuring PostgreSQL for PCF](./installing.html).
 
-##<a id='using'></a> Use a9s PostgreSQL for PCF With an App
+##<a id='using'></a> Use a9s PostgreSQL for PCF with an App
 
 To use the a9s PostgreSQL for PCF with with an app, follow the procedures in this section to create a service instance and bind the service instance
 to your app. For more information about managing service instances, see <a href="https://docs.cloudfoundry.org/devguide/services/managing-services.html" target="_blank">Managing Service Instances with the CLI</a>.
@@ -55,7 +55,7 @@ $ cf bind-service a9s-postgresql-app my-postgresql-service
 
 ### <a id="restart"></a>Restage or Restart Your App
 
-To enable your application to access the service instance, run `cf restage` or `cf restart` to restage or restart your application.
+To enable your app to access the service instance, run `cf restage` or `cf restart` to restage or restart your app.
 
 ### <a id="obtain"></a>Obtain Service Instance Access Credentials
 
