@@ -42,8 +42,6 @@ Use **Assign AZs and Networks** to configure the location of service instance jo
 
 Use **Errands** to configure the BOSH Errands used by a9s PostgreSQL for PCF. For more information, see the [Understanding Lifecycle Errands](https://docs.pivotal.io/tiledev/tile-errands.html) topic.
 
-<%= image_tag("a9s-postgresql-for-pcf-errands.png") %>
-
 ### Post-Deploy Errands
 
  * **Run BOSH Configurator**: 
@@ -95,8 +93,6 @@ Each service plan is defined in the following fields:
 ##<a id="stemcell"></a>Configure Stemcells
 
 Use **Configure Stemcells** enable another stemcell than the default one. Click **Import Stemcell** to upload a new stemcell.
-
-<%= image_tag("stemcell-tab.png") %>
 
 ##<a id='deployment_updater'></a>Upgrade Existing Service Instances After a Tile Update
 This errand automatically updates the stemcell and all provisioned a9s PostgreSQL for PCF service instances to their lastest version after updating the tile.<br />
