@@ -19,13 +19,20 @@ or a set of VMs consisting of multiple virtual machines comprising a cluster of 
 
 a9s PostgreSQL for PCF includes the following key features:
 
-| Feature | Benefits |
-|---|---|
-| **On&dash;demand Service Instance Provisioning** | 
-<ul>
-<li>Fully automated deployment of PostgreSQL. Developers can provision a single-VM PostgreSQL server or a multi-VM PostgreSQL cluster with a single command.</li><li>Only existing service instances allocate infrastructure resources, which are released when you delete the service instance.</li>
-<li>The number of service instances is not limited by design.</li>
-</ul>|
+<table class="nice">
+<th>Feature</th>
+<th>Benefits</th>
+ <tr>
+ <td>On&dash;demand Service Instance Provisioning</td>
+ <td>
+ 	<ul>
+ 		<li>Fully automated deployment of PostgreSQL. Developers can provision a single-VM PostgreSQL server or a multi-VM PostgreSQL cluster with a single command.</li>
+ 		<li>Only existing service instances allocate infrastructure resources, which are released when you delete the service instance.</li>
+ 		<li>The number of service instances is not limited by design.</li>
+ 	</ul>
+ </td>
+ </tr>
+
 | **Service Instance Isolation** | 
 <ul>
 <li>Each PostgreSQL server runs on a dedicated virtual machine to ensure bad neighborhood protection and align with enterprise security requirements.</li>
