@@ -32,13 +32,16 @@ a9s PostgreSQL for PCF includes the following key features:
  	</ul>
  </td>
  </tr>
-
-| **Service Instance Isolation** | 
-<ul>
-<li>Each PostgreSQL server runs on a dedicated virtual machine to ensure bad neighborhood protection and align with enterprise security requirements.</li>
-<li>Cloud Foundry security groups ensure that only authorized applications connect to service instances.</li>
-</ul>
-| **High Availability** | 
+ <tr>
+ <td>Service Instance Isolation</td> 
+ <td>
+    <ul>
+        <li>Each PostgreSQL server runs on a dedicated virtual machine to ensure bad neighborhood protection and align with enterprise security requirements.</li>
+ 		<li>Cloud Foundry security groups ensure that only authorized applications connect to service instances.</li>
+ 	</ul>
+ </td>
+<td>High Availability</td> 
+<td>
 <ul>
 <li>The [Replication Manager for PostgreSQL](http://repmgr.org/) ensures high availability.</li>
 <li>**Consul-based internal DNS** delivered by a9s Consul DNS for PCF ensures that the connected app always connects to a working node.</li>
