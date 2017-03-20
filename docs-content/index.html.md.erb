@@ -40,16 +40,37 @@ a9s PostgreSQL for PCF includes the following key features:
  		<li>Cloud Foundry security groups ensure that only authorized applications connect to service instances.</li>
  	</ul>
  </td>
+ <tr>
 <td>High Availability</td> 
 <td>
-<ul>
-<li>The [Replication Manager for PostgreSQL](http://repmgr.org/) ensures high availability.</li>
-<li>**Consul-based internal DNS** delivered by a9s Consul DNS for PCF ensures that the connected app always connects to a working node.</li>
-<li>The clustered data service plans are spread across several infrastructure availability zones, which enables very short failover times and a strong resilience of individual infrastructure hosts or even entire availability zones.</li>|
-| **Smoke Tests** | a9s MongoDB for PCF contains a post-deploy smoke tests errand that runs a series of basic tests against your installation to ensure that it is configured properly. |
-| **Service Instance Capacity Upgrade** | Cloud Foundry Service Plan updates allow upgrades to the RAM, CPU, and storage capacity for your MongoDB instances. |
-| **Logging and Monitoring** | Each MongoDB service instance provides log messages and MongoDB-specific metrics to one or more `syslog/graphite` endpoints. You can configure the `syslog/graphite` endpoint to receive logging and monitoring information. |
-| **Deployment Updater** | This errand automatically updates the stemcell and all provisioned a9s MongoDBs for PCF service instances to their lastest version. |
+	<ul>
+		<li>The [Replication Manager for PostgreSQL](http://repmgr.org/) ensures high availability.</li>
+		<li>**Consul-based internal DNS** delivered by a9s Consul DNS for PCF ensures that the connected app always connects to a working node.</li>
+		<li>The clustered data service plans are spread across several infrastructure availability zones, which enables very short failover times and a strong resilience of individual infrastructure hosts or even entire availability zones.</li>
+	</ul>
+</td>
+</tr>
+<tr>
+<td>Smoke Tests</td>
+<td>a9s MongoDB for PCF contains a post-deploy smoke tests errand that runs a series of basic tests against your installation to ensure that it is configured properly.</td>
+</tr>
+<tr>
+<td>Service Instance Capacity Upgrade</td>
+<td>Cloud Foundry Service Plan updates allow upgrades to the RAM, CPU, and storage capacity for your MongoDB instances.</td>
+</tr>
+<tr>
+<td>Service Instance Capacity Upgrade</td>
+<td>Cloud Foundry Service Plan updates allow upgrades to the RAM, CPU, and storage capacity for your MongoDB instances.</td>
+</tr>
+<tr>
+<td>Logging and Monitoring</td>
+<td>Each MongoDB service instance provides log messages and MongoDB-specific metrics to one or more `syslog/graphite` endpoints. You can configure the `syslog/graphite` endpoint to receive logging and monitoring information.</td>
+</tr>
+<tr>
+<td>Deployment Updater</td>
+<td>This errand automatically updates the stemcell and all provisioned a9s MongoDBs for PCF service instances to their lastest version.</td>
+</tr>
+</table>
 
 ### <a id="upcoming"></a>Upcoming Features
 
