@@ -44,37 +44,37 @@ Use **Errands** to configure the BOSH Errands used by a9s PostgreSQL for PCF. Fo
 
 ### Post-Deploy Errands
 
- * **Run BOSH Configurator**: 
-	This errand configures a9s BOSH for PCF so that it can provision PostgreSQL
-	service instances. When enabled, this errand uploads the required
-	stemcells in the BOSH release. Disabling this errand may speed up the
-	deployment of all tiles.
+ * **Run BOSH Configurator**:
+	This errand configures **a9s BOSH for PCF** so that it can provision PostgreSQL
+	service instances. When enabled, this errand uploads the required releases in
+  the a9s BOSH Director. Disabling this errand may speed up the deployment of
+  all tiles.
 
 	<p class="note"><strong>Note</strong>: To ensure your configuration remains up-to-date, disable this errand only when necessary.</p>
 
- * **Run Template Uploader**: 
+ * **Run Template Uploader**:
 	This errand is required to configure generic components that are included in a9s PostgreSQL for PCF with MPostgreSQLongoDB  configurations.
 	Disabling this errand may speed up the deployment of all tiles.
 
 	<p class="note"><strong>Note</strong>: To ensure your configuration remains up-to-date, disable this errand only when necessary.</p>
 
- * **Run Broker Registrar**: 
+ * **Run Broker Registrar**:
 	This errand registers the a9s PostgreSQL for PCF service broker
 	at the Elastic Runtime. This makes the service available in the Elastic Runtime
 	marketplace.
 
- * **Run Smoke Tests**: 
+ * **Run Smoke Tests**:
  This errand runs a series of basic tests against your a9s PostgreSQL for PCF
  installation to ensure that it is configured properly. Those tests may
- take awhile, probably over 30 minutes.
+ take a while, probably over 30 minutes.
 
 ### Pre-Delete Errands
 
- * **Delete all a9s PostgreSQL instances**: 
+ * **Delete all a9s PostgreSQL instances**:
 	This errand deletes all a9s PostgreSQL instances which were created with `cf create-service` by PCF end users.
 	<p class="note"><strong>Attention</strong>: This is an absolutly destructive task and can't be undone. All VMs of the service instances will be deleted irrecoverably. In the case a service instance is bound to an app or service keys are existing, the errand will fail.</p>
 
- * **Run Broker Deregistrar**: 
+ * **Run Broker Deregistrar**:
 	This will deregister the a9s PostgreSQL for PCF service broker in Elastic Runtime. This errand removes the a9s PostgreSQL service from the Elastic Runtime marketplace.
 
 ##<a id="configure-service-instance"></a> Configure Service Plans
