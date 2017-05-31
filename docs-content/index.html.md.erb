@@ -70,6 +70,12 @@ a9s PostgreSQL for PCF includes the following key features:
 <td>Deployment Updater</td>
 <td>This errand automatically updates the stemcell and all provisioned a9s MongoDBs for PCF service instances to their lastest version.</td>
 </tr>
+<td>Backup Manager</td>
+<td>The Backup Manager does regular backup of your instances and offers endpoints to backup instantly and restore backups.</td>
+</tr>
+<td>Service Guard</td>
+<td>The Service Guard creates Cloud Foundry security groups for your service instance VMs.<br /><br />  When the IP address of a service instance changes, the guard will update the security group. The Service Guard will also restart the application instances bound to the affected service instance. <b>The instances of one application will be restarted one by one to avoid downtime.</b></td>
+</tr>
 </table>
 
 [//]: # (### <a id="upcoming"></a>Upcoming Features)
@@ -138,15 +144,15 @@ For more information, see [Installing and Configuring a9s PostgreSQL for PCF](./
 
 ## <a id="feedback"></a>Feedback and Support
 
-a9s PostgreSQL for PCF is an automation toolset for Open Source PostgreSQL. 
-The entire anynines team can help your team get started and be successful. 
+a9s PostgreSQL for PCF is an automation toolset for Open Source PostgreSQL.
+The entire anynines team can help your team get started and be successful.
 Technical support, including a service level agreement, is available with a commercial license.
 
 If your company has specific PostgreSQL administration policies or configuration best practices, the anynines team is happy to incorporate them,
-if applicable. 
+if applicable.
 Third-party PostgreSQL support organizations are also welcome to assist.
 
-Contributions are welcome and will be investigated by the anynines team. 
+Contributions are welcome and will be investigated by the anynines team.
 Send any bugs, feature requests, or questions to svc.support@anynines.com.
 
 ## <a id='license'></a>License
