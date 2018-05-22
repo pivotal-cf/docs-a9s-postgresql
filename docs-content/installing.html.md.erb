@@ -6,21 +6,6 @@ owner: Partners
 This topic describes how to install and configure a9s PostgreSQL for Pivotal Cloud Foundry (PCF).
 
 
-##<a id='prerequisites'></a> Prerequisites
-
-Before installing a9s PostgreSQL for PCF, ensure that you have installed and configured the products and tiles listed in [Requirements](./index.html#reqs).
-
-This comprises the **a9s Consul DNS for PCF** tile and the **a9s BOSH for PCF** tile.
-
-The a9s Consul DNS for PCF tile is required because it is responsible for providing an
-internal DNS system to the other a9s service tiles, the a9s PostgreSQL for PCF
-included.
-For more information about this tile, see [The Purpose of the a9s Consul DNS for PCF Tile](https://docs.pivotal.io/partners/a9s-consul-dns/usecase.html).
-
-The a9s BOSH for PCF tile is required because it is used by the a9s service tiles,
-for the provisioning and lifecycle management of their VM.
-For more information about this tile, see [a9s BOSH for PCF Use Case](https://docs.pivotal.io/partners/a9s-bosh/usecase.html).
-
 ##<a id='install'></a> Install a9s PostgreSQL for PCF
 
 To install a9s PostgreSQL for PCF, perform the following steps:
@@ -33,11 +18,13 @@ To install a9s PostgreSQL for PCF, perform the following steps:
 **Available Products** view to add it to your staging area.
 
 4. Click the new tile, then click **Settings** to review the configuration settings for each tab.
-	For more information on how to configure the properties on each side-tab, see the following:
-	* [Assign AZs and Networks](#azs)
-	* [Configure BOSH Errands](#errands)
-	* [Configure Resources](#resource-config)
-	* [Configure Stemcells](#stemcell)
+  For more information on how to configure the properties on each side-tab, see the following:
+  * [Assign AZs and Networks](#azs)
+  * [Plan Configuration](#plan_configuration)
+  * [Backup Configuration](#backup_configuration)
+  * [Syslog](#syslog)
+  * [Configure BOSH Errands](#errands)
+  * [Configure Resources](#resource-config)
 
 5. Click **Apply Changes** to deploy the service.
 
@@ -46,16 +33,18 @@ After you install the a9s PostgreSQL for PCF, it is available in the list of Mar
 
 ###<a id="azs"></a>Assign AZs and Networks
 
-Use **Assign AZs and Networks** to configure the location of service instance jobs. Configure your network to balance cluster jobs between as many AZs as possible.
+Use **Assign AZs and Networks** to configure the location of service component and service instance jobs. Configure your network to balance cluster jobs between as many AZs as possible.
 
-<%= image_tag("az-and-networks.png") %>
+<%= image_tag("assign_azs_and_networks.png") %>
+
+###<a id="backup_configuration"></a>Backup Configuration
 
 
 ###<a id='errands'></a>Configure Errands
 
 Use **Errands** to configure the lifecycle errands that run when you install or uninstall a9s PostgreSQL for PCF. The list below describes each errand. For more information, see [Understanding Lifecycle Errands](https://docs.pivotal.io/tiledev/tile-errands.html).
 
-<%= image_tag("a9s-postgresql-errands.png") %>
+<%= image_tag("errands.png") %>
 
 
 #### Post-Deploy Errands
@@ -66,17 +55,17 @@ Use **Errands** to configure the lifecycle errands that run when you install or 
   the a9s BOSH Director. Disabling this errand may speed up the deployment of
   all tiles.
 
-	<p class="note"><strong>Note</strong>: To ensure your configuration remains up-to-date, disable this errand only when necessary.</p>
+  <p class="note"><strong>Note</strong>: To ensure your configuration remains up-to-date, disable this errand only when necessary.</p>
 
  * **Run Template Uploader**:
-	This errand is required to configure generic components that are included in a9s PostgreSQL for PCF with MPostgreSQLongoDB  configurations.
-	Disabling this errand may speed up the deployment of all tiles.
+  This errand is required to configure generic components that are included in a9s PostgreSQL for PCF with MPostgreSQLongoDB  configurations.
+  Disabling this errand may speed up the deployment of all tiles.
 
-	<p class="note"><strong>Note</strong>: To ensure your configuration remains up-to-date, disable this errand only when necessary.</p>
+  <p class="note"><strong>Note</strong>: To ensure your configuration remains up-to-date, disable this errand only when necessary.</p>
 
  * **Run Broker Registrar**:
-	This errand registers the a9s PostgreSQL for PCF service broker
-	at the Elastic Runtime. This makes the service available in the Marketplace.
+  This errand registers the a9s PostgreSQL for PCF service broker
+  at the Elastic Runtime. This makes the service available in the Marketplace.
 
  * **Run Smoke Tests**:
  This errand runs a series of basic tests against your a9s PostgreSQL for PCF
@@ -87,11 +76,11 @@ Use **Errands** to configure the lifecycle errands that run when you install or 
 #### Pre-Delete Errands
 
  * **Delete all a9s PostgreSQL instances**:
-	This errand deletes all a9s PostgreSQL instances which were created with `cf create-service` by PCF end users.
-	<p class="note warning"><strong>WARNING</strong>: This is an absolutly destructive task and can't be undone. All VMs of the service instances will be deleted irrecoverably. In the case a service instance is bound to an app or service keys are existing, the errand will fail.</p>
+  This errand deletes all a9s PostgreSQL instances which were created with `cf create-service` by PCF end users.
+  <p class="note warning"><strong>WARNING</strong>: This is an absolutly destructive task and can't be undone. All VMs of the service instances will be deleted irrecoverably. In the case a service instance is bound to an app or service keys are existing, the errand will fail.</p>
 
  * **Run Broker Deregistrar**:
-	This will deregister the a9s PostgreSQL for PCF service broker in Elastic Runtime. This errand removes the a9s PostgreSQL service from the Marketplace.
+  This will deregister the a9s PostgreSQL for PCF service broker in Elastic Runtime. This errand removes the a9s PostgreSQL service from the Marketplace.
 
 
 ###<a id='resource-config'></a> Configure Resources
@@ -199,18 +188,16 @@ Errand 'deployment-updater' completed successfully (exit code 0)
 
 ##<a id='interacting-with-the-backup-manager'></a> Trigger Backups and Restores on Demand
 
-Only PCF administrators can interact with the Backup Manager
+PCF administrators can interact with the Backup Manager
 endpoints to trigger immediate backups and restore backups.
 
 To backup, perform the following steps:
 
-1. Navigate to the **Status** tab of the tile and record the IP address of one of the Backup Manager instances.
+1. Navigate to the **Status** tab of the tile and record the IP address of one of the a9s Ancillary Service instances.
 
-    <%= image_tag("backup-manager-status-tab.png", width: 300) %>
+    <%= image_tag("status_tab.png", width: 300) %>
 
-2. On the **Credentials** tab, find the credentials of the service under **backup-manager** > **Backup Manager Credentials**.
-
-    <%= image_tag("backup-manager-credentials.png", width: 300) %>
+2. On the **Credentials** tab, find the credentials of the service under **Backup Manager Password**.
 
 2. Trigger a backup on all instances by calling the **/backup\_agent/backup\_all** endpoint:
 <pre class="terminal">
@@ -249,7 +236,7 @@ This command outputs an array composed of objects like this one:
   "id": 1
 }
 </pre>
-In the example above, backups and restores that have been performed for 
+In the example above, backups and restores that have been performed for
 the instance with the instance\_id `1c16933a-892f-4fe0-b968-ea0bf90246c9`.
 This ID corresponds to the instance GUID from PCF.
 
