@@ -138,28 +138,28 @@ Logged in as 'director'
 
 3. Run `bosh deployments` and record the name of the a9s PostgreSQL for PCF deployment from the **Name** column:
 <pre class="terminal">
-  $ bosh deployments
-  Using environment '172.28.10.11' as client 'ops_manager'
+$ bosh deployments
+Using environment '172.28.10.11' as client 'ops_manager'
   
-  Name                                 Release(s)                            Stemcell(s)                                       Team(s)                              Cloud Config
-  a9s-postgresql-94443f82b52dcf333bbd  a9s-consul/18                         bosh-vsphere-esxi-ubuntu-trusty-go_agent/3468.25  -                                    latest
-                                       ...
-                                       template-uploader-errand/120
-  cf-7fcd1f89150a96b381d0              backup-and-restore-sdk/1.2.1          bosh-vsphere-esxi-ubuntu-trusty-go_agent/3468.25  -                                    latest
-                                       ...
-                                       uaa/52.7
+Name                                 Release(s)                            Stemcell(s)                                       Team(s)                              Cloud Config
+a9s-postgresql-94443f82b52dcf333bbd  a9s-consul/18                         bosh-vsphere-esxi-ubuntu-trusty-go_agent/3468.25  -                                    latest
+                                     ...
+                                     template-uploader-errand/120
+cf-7fcd1f89150a96b381d0              backup-and-restore-sdk/1.2.1          bosh-vsphere-esxi-ubuntu-trusty-go_agent/3468.25  -                                    latest
+                                     ...
+                                     uaa/52.7
 </pre>
 
 4. Run `bosh -d a9s-postgresql-service-94443f82b52dcf333bbd run errand deployment-updater` to force the update for all existing a9s PostgreSQL for PCF instances:
 <pre class="terminal">
-  $ bosh -d a9s-postgresql-0476d61a219a39bf0e1b run-errand deployment-updater
-  Using environment '172.28.10.11' as client 'ops_manager'
+$ bosh -d a9s-postgresql-0476d61a219a39bf0e1b run-errand deployment-updater
+Using environment '172.28.10.11' as client 'ops_manager'
 
-  Using deployment 'a9s-postgresql-0476d61a219a39bf0e1b'
+Using deployment 'a9s-postgresql-0476d61a219a39bf0e1b'
 
-  Task 14855
+Task 14855
 
-  Task 14855 | 12:02:00 | Preparing deployment: Preparing deployment (00:00:00)
+Task 14855 | 12:02:00 | Preparing deployment: Preparing deployment (00:00:00)
 &nbsp;
 ...
 &nbsp;
