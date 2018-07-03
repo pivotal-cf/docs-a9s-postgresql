@@ -2,43 +2,14 @@
 
 This topic describes how to use PostgreSQL.
 
-- [Use PostgreSQL with an Application](#use-a9s-postgresql-with-an-application)
-  - [View the PostgreSQL Service](#view-the-a9s-postgresql-service)
-  - [Create a Service Instance](#create-a-service-instance)
-  - [Bind an Application to a Service Instance](#bind-an-application-to-a-service-instance)
-  - [Restage or Restart Your Application](#restage-or-restart-your-application)
-  - [Obtain Service Instance Access Credentials](#obtain-service-instance-access-credentials)
-- [Delete an PostgreSQL Service Instance](#delete-an-a9s-postgresql-service-instance)
-  - [List Available Services](#list-available-services)
-  - [Unbind a Service Instance](#unbind-a-service-instance)
-  - [Delete a Service Instance](#delete-a-service-instance)
-- [Upgrade the Service Instance to another Service Plan](#upgrade-the-service-instance-to-another-service-plan)
-- [Add a Graphite Endpoint](#add-a-graphite-endpoint)
-- [Add a Syslog Endpoint](#add-a-syslog-endpoint)
-- [Cloud Foundry Application Security Groups](#cloud-foundry-application-security-groups)
-  - [Get Service Instance GUID](#get-service-instance-guid)
-  - [Check available Security Groups](#check-available-security-groups)
-- [Backup and Restore Service Instances](#backup-and-restore-service-instances)
-  - [Get Dashboard Address, Login and Authorize](#get-dashboard-address-login-and-authorize)
-  - [Perform a Backup](#perform-a-backup)
-  - [Restore a Backup](#restore-a-backup)
-- [Make a Service Instance Locally Available](#make-a-service-instance-locally-available)
-  - [Get The Service Url and Credentials](#get-the-service-url-and-credentials)
-  - [Create a Tunnel to The Service](#create-a-tunnel-to-the-service)
-- [a9s PostgreSQL Extensions](#postgresql-extensions)
-- [a9s PostgreSQL Custom Parameters](#postgresql-custom-parameters)
-- [Create a Fork of a Service Instance](#create-a-fork-of-a-service-instance)
 
-## Use PostgreSQL with an App
+## <a id='use-a9s-postgresql-with-an-application'></a> Use PostgreSQL with an App
 
-To use the PostgreSQL with with an app, follow the procedures in this section to create a service instance and bind the service instance
-to your app. For more information on managing service instances, see [Managing Service Instances with the cf CLI](https://docs.cloudfoundry.org/devguide/services/managing-services.html).
+To use the PostgreSQL with with an app, follow the procedures in this section to create a service instance and bind the service instance to your app. For more information on managing service instances, see [Managing Service Instances with the cf CLI](https://docs.cloudfoundry.org/devguide/services/managing-services.html).
 
-### View the PostgreSQL Service
+### <a id='view-the-a9s-postgresql-service'></a> View the PostgreSQL Service
 
-After the service is installed, `a9s-postgresql` and its service
-plans appear in your CF marketplace. Run `cf marketplace` to
-see the service listing:
+After the service is installed, `a9s-postgresql` and its service plans appear in your CF marketplace. Run `cf marketplace` to see the service listing:
 
 ```bash
 $ cf marketplace
@@ -51,8 +22,7 @@ a9s-postgresql04     postgresql-single-small, postgresql-cluster-small, postgres
 
 See the next section for instructions on creating a9s PostgreSQL service instances based on the plans listed in the `cf marketplace` output.
 
-
-### Create a Service Instance
+### <a id='create-a-service-instance'></a> Create a Service Instance
 
 To provision a Posa9s PostgreSQLtgreSQL database, run `cf create-service`. For example:
 
@@ -64,8 +34,7 @@ Depending on your infrastructure and service broker usage, it may take several m
 
 Check the creation status using `cf services`. This displays a list of all your service instances. To check the status of a specific service instance, run `cf service NAME-OF-YOUR-SERVICE`.
 
-
-### Bind an Application to a Service Instance
+### <a id='bind-an-application-to-a-service-instance'></a> Bind an Application to a Service Instance
 
 After you create your database, run `cf bind-service` to bind the service to your application:
 
@@ -73,16 +42,15 @@ After you create your database, run `cf bind-service` to bind the service to you
 $ cf bind-service a9s-postgresql-app my-postgresql-service
 ```
 
-### Restage or Restart Your Application
+### <a id='estage-or-restart-your-application'></a> Restage or Restart Your Application
 
 To enable your app to access the service instance, run `cf restage` or `cf restart` to restage or restart your app.
 
-### Obtain Service Instance Access Credentials
+### <a id='obtain-service-instance-access-credentials'></a> Obtain Service Instance Access Credentials
 
 After a service instance is bound to an application, the credentials of your a9s PostgreSQL database are stored in the environment variables of the application. Run `cf env APP-NAME` to display the environment variables.
 
 You can find the credentials in the [VCAP_SERVICES](https://docs.cloudfoundry.org/devguide/deploy-apps/environment-variable.html#VCAP-SERVICES) key.
-
 
 ```bash
 $ cf env a9s-postgresql-app
@@ -119,13 +87,14 @@ System-Provided:
 
 You can use the host, username and password values to connect to your database with a a9s PostgreSQL client.
 
-## Delete an PostgreSQL Service Instance
 
-*WARNING: Before deleting a service instance, you must backup data stored in your database. This operation cannot be undone and all the data is lost when the service is deleted.*
+## <a id='delete-an-a9s-postgresql-service-instance'></a> Delete an PostgreSQL Service Instance
+
+<p class='note warning'></a><strong>WARNING:</strong> Before deleting a service instance, you must back up data stored in your database. This operation cannot be undone and all the data is lost when the service is deleted.</p>
 
 Before you can delete a service instance, you must unbind it from all apps.
 
-### List Available Services
+### <a id='list-available-services'></a> List Available Services
 
 Run `cf services` to list your available services.
 
@@ -141,7 +110,7 @@ my-postgresql-service   a9s-postgresql   postgresql-single-small   a9s-postgresq
 
 This example shows that `my-postgresql-service` is bound to the `a9s-postgresql-app` app.
 
-### Unbind a Service Instance
+### <a id='unbind-a-service-instance'></a> Unbind a Service Instance
 
 Run `cf unbind` to unbind the service from your app.
 
@@ -149,8 +118,7 @@ Run `cf unbind` to unbind the service from your app.
 $ cf unbind-service a9s-postgresql-app my-postgresql-service
 ```
 
-
-### Delete a Service Instance
+### <a id='delete-a-service-instance'></a> Delete a Service Instance
 
 After unbinding the service, it is no longer bound to an application. Run `cf delete-service` to delete the service:
 
@@ -161,33 +129,33 @@ After unbinding the service, it is no longer bound to an application. Run `cf de
 It may take several minutes to delete the service. Deleting a service deprovisions the corresponding infrastructure resources.
 Run the `cf services` command to view the deletion status.
 
-# Upgrade the Service Instance to another Service Plan
 
-Once created, you can upgrade your service instance to another, larger service plan. A larger service plan provides more CPU, RAM and storage. For more information, see the  [Update a Service Instance](https://docs.cloudfoundry.org/devguide/services/managing-services.html#update_service) of the _Managing Service Instances with the cf CLI_ topic.
+# <a id='upgrade-the-service-instance-to-another-service-plan'></a> Upgrade the Service Instance to another Service Plan
+
+Once created, you can upgrade your service instance to another, larger service plan. A larger service plan provides more CPU, RAM, and storage. For more information, see the  [Update a Service Instance](https://docs.cloudfoundry.org/devguide/services/managing-services.html#update_service) of the _Managing Service Instances with the cf CLI_ topic.
 
 ```bash
 $ cf update-service my-postgresql-service -p a-bigger-plan
 ```
 
-Here are the plans you can upgrade to depending on the one you are currently
-using:
+Here are the plans you can upgrade to depending on the one you are currently using:
 
 * If you are currently using the `postgresql-single-small` plan, you can upgrade to the `postgresql-single-big` plan.
 
 * If you are currently using the `postgresql-cluster-small` plan, you can upgrade to the `postgresql-cluster-big` plan.
 
-## Add a Graphite Endpoint
 
-If you want to monitor your service with Graphite, you can set an endpoint to
-where to information will be sent with the `cf update-service` command. This command expects the [-c flag](https://docs.cloudfoundry.org/devguide/services/managing-services.html#arbitrary-params-binding)
-and a JSON string containing the `graphite` and `metrics_prefix` keys.
-Depending on your graphite provider  the `metrics_prefix` might require that each metrics must start with an API key in their name. You can also change the interval within the data is send to the endpoint. Do to this modify `interval` the default is 10s.
+## <a id='add-a-graphite-endpoint'></a> Add a Graphite Endpoint
+
+If you want to monitor your service with Graphite, you can set an endpoint to where to information will be sent with the `cf update-service` command. This command expects the [-c flag](https://docs.cloudfoundry.org/devguide/services/managing-services.html#arbitrary-params-binding) and a JSON string containing the `graphite` and `metrics_prefix` keys.
+Depending on your graphite provider, the `metrics_prefix` might require that each metrics must start with an API key in their name. You can also change the interval within the data is send to the endpoint. To do this, modify `interval`; the default is 10s.
 
 ```bash
 $ cf update-service my-postgresql-service -c '{ "graphite": ["yourspace.your-graphite-endpoint.com:12345"], "metrics_prefix": "your-api-key.my-cluster-postgresql", "interval": "5"}'
 ```
 
-## Add a Syslog Endpoint
+
+## <a id='add-a-syslog-endpoint'></a> Add a Syslog Endpoint
 
 The `cf update-service` command used with the [-c flag](https://docs.cloudfoundry.org/devguide/services/managing-services.html#arbitrary-params-binding) can let you stream your syslog to a third-party service. In this case, the command expects a JSON string containing the `syslog` key. You can also change the interval for the syslog with the same key than for the graphite endpoint `interval`.
 
@@ -195,26 +163,26 @@ The `cf update-service` command used with the [-c flag](https://docs.cloudfoundr
 $ cf update-service my-postgresql-service -c '{ "syslog": ["logs4.your-syslog-endpoint.com:54321"], "interval": "5" }'
 ```
 
-## Cloud Foundry Application Security Groups
+
+## <a id='cloud-foundry-application-security-groups'></a> Cloud Foundry Application Security Groups
 
 This topic describes how to check whether a security group was created.
 
 Each a9s Data Service will automatically create and update Cloud Foundry security groups in order to protected service instances to be accessed by applications not running in the same Cloud Foundry applications space.
-To get a better understanding about Security Groups you can have a look on the
-[Understanding Application Security Groups](https://docs.cloudfoundry.org/concepts/asg.html) topic.
+To get a better understanding about Security Groups, see [Understanding Application Security Groups](https://docs.cloudfoundry.org/concepts/asg.html).
 
-### Get Service Instance GUID
+### <a id='get-service-instance-guid'></a> Get Service Instance GUID
 
-Run `cf service INSTANCE_NAME --guid` to get the guid of the service instance.
+To get the GUID of the service instance, run `cf service INSTANCE_NAME --guid`.
 
 ```bash
 $ cf service my-postgresql --guid
 ca16f111-5073-40b7-973a-156c75dd3028
 ```
 
-### Check available Security Groups
+### <a id='check-available-security-groups'></a> Check Available Security Groups
 
-To see all available security groups use `cf security-groups`.
+To see all available security groups, run `cf security-groups`.
 
 ```
 $cf security-groups
@@ -229,16 +197,16 @@ OK
 #4   guard_ca16f111-5073-40b7-973a-156c75dd3028   demonstrations   demo
 ```
 
-There we can see a security group with the named `guard_ca16f111-5073-40b7-973a-156c75dd3028`
-was successfully created.
+You can see a security group with the named `guard_ca16f111-5073-40b7-973a-156c75dd3028` was successfully created.
 
-*NOTE: in some circumstances the connection between the application and the service instance is not possible, in this case check if a security group was created.*
+<p class='note'><strong>Note:</strong> In some circumstances, the connection between the application and the service instance is not possible. In this case, check to see if a security group was created.</p>
 
-## Backup and Restore Service Instances
+
+## <a id='backup-and-restore-service-instances'></a> Back Up and Restore Service Instances
 
 PostgreSQL provides an easy way to create backups and restore if needed.
 
-### Get Dashboard Address, Login and Authorize
+### <a id='get-dashboard-address-login-and-authorize'></a> Get Dashboard Address, Log In, and Authorize
 
 1. Grap the dashboard URL with `cf service SERVICE-NAME`.
   ```bash
@@ -260,48 +228,50 @@ PostgreSQL provides an easy way to create backups and restore if needed.
   Updated: 2017-10-26T08:28:38Z
   ```
 
-2. Browse to the dashboard URL and authenticate on the redirected page with your Cloud Foundry credentials:
+1. Browse to the dashboard URL and authenticate on the redirected page with your Cloud Foundry credentials.
 ![authentication-page](images/authentication-page.png)
 
-3. Click **Authorize** to approve the authorization request:
+1. Click **Authorize** to approve the authorization request.
 ![authorization-page](images/authorization-page.png)
 
-### Perform a Backup
+### <a id='perform-a-backup'></a> Perform a Backup
 
-On the dashboard as shown above you can trigger a backup by clicking **Trigger backup**
+On the dashboard, you can trigger a backup by clicking **Trigger backup**.
 
 ![service-dashboard](images/service-dashboard.png)
 
-After a short period of time the backup will be queued. The backup process will start soon.
+After a short period of time, the backup will be queued and the backup process will soon start.
 
 ![service-dashboard](images/service-dashboard-bkp-triggered.png)
 
-*NOTE: Depending on the size of the data the backup will take some time.*
+<p class='note'><strong>Note:</strong> Depending on the size of the data, the backup will take some time.</p>
 
-### Restore a Backup
+### <a id='restore-a-backup'></a> Restore a Backup
 
-Open the dashboard again and select the backup you would like to restore.
-Click the **Restore** button of the backup. After a short period of time the restore will be triggered.
+1. Open the dashboard again and select the backup you would like to restore.
+
+1. Click **Restore** and wait for the restore to trigger.
 
 ![service-dashboard](images/service-dashboard-restore-triggered.png)
 
-*NOTE: Same as the backup, depending on the size of the data, the restore will take some time.*
+<p class='note'><strong>Note:</strong> Depending on the size of the data, the restore will take some time.</p>
 
 ![service-dashboard](images/service-dashboard-final.png)
 
-## Make a Service Instance Locally Available
 
-It is possible to access any of the a9s Data Services locally. That means you can connect with a local client to the service for any purpose such as debbuging.
-CF provides a smart way to create SSH forward tunnels via a pushed application.
-For more information about this feature see the [Accessing Apps with SSH](https://docs.cloudfoundry.org/devguide/deploy-apps/ssh-apps.html) section of the CF documentation.
+## <a id='make-a-service-instance-locally-available'></a> Make a Service Instance Locally Available
 
-First of all you must have an application bound to the service. How to do this see [Bind an Application to a Service Instance](#bind-an-application-to-a-service-instance).
+It is possible to access any of the a9s Data Services locally. You can connect with a local client to the service for any purpose, such as debugging.
+CF provides a smart way to create SSH forward tunnels through a pushed application.
+For more information about this feature, see the [Accessing Apps with SSH](https://docs.cloudfoundry.org/devguide/deploy-apps/ssh-apps.html) section of the CF documentation.
 
-*NOTE: `cf ssh` support must be enabled in the platform. Ask your administrator if you are not sure.*
+First, you must have an application bound to the service. To do this, see [Bind an Application to a Service Instance](#bind-an-application-to-a-service-instance).
 
-### Get The Service Url and Credentials
+<p class='note'><strong>Note:</strong> `cf ssh` support must be enabled in the platform. Your administrator can tell you whether it is enabled.</p>
 
-When you follow this instructions [Obtain Service Instance Access Credentials](#obtain-service-instance-access-credentials) you will get the hostname of the service and the user credentials.
+### <a id='get-the-service-url-and-credentials'></a> Get the Service URL and Credentials
+
+You must first follow the procedure in [Obtain Service Instance Access Credentials](#obtain-service-instance-access-credentials) to get the hostname of the service and the user credentials.
 
 ```bash
 $ cf env a9s-postgresql-app
@@ -333,28 +303,28 @@ System-Provided:
 ...
 ```
 
-Notice the host `d67901c-psql-master-alias.node.dc1.consul`, the username `a9s-brk-usr` and the password `a9s-password`. You will need this in the next step.
+Note the host `d67901c-psql-master-alias.node.dc1.consul`, the username `a9s-brk-usr`, and the password `a9s-password`. You will need this in the next step.
 
-### Create a Tunnel to The Service
+### <a id='create-a-tunnel-to-the-service'></a> Create a Tunnel to the Service
 
-With the `cf ssh` as mentioned before you can create a ssh forward tunnel to the management dashboard.
-Use port 5432 to connect to the PostgreSQL Instance.
+With `cf ssh`,  you can create am SSH forward tunnel to the management dashboard.
+Use port `5432` to connect to the PostgreSQL Instance.
 
 ```bash
 $ cf ssh a9s-postgresql-app -L 5432:d67901c-psql-master-alias.node.dc1.consul:5432
 vcap@956aaf4e-6da9-4f69-4b1d-8e631a403312:~$
 ```
 
-When the ssh tunnel is open you can access the instance over the address `localhost:5432`.
+When the SSH tunnel is open, you can access the instance using the address `localhost:5432`.
 
-*NOTE: Don't forget to close the session with `exit`.*
+<p class='note'><strong>Note:</strong> Be sure to close the session with <code>exit</code>.</p>
 
-## a9s PostgreSQL Extensions
 
-#### Create or Drop Extensions
+## <a id='postgresql-extensions'></a> a9s PostgreSQL Extensions
 
-It is possible to install a9s PostgreSQL extensions with the Cloud Foundry CLI and
-additional configuration parameters:
+### <a id='postgresql-custom-parameters'></a> Create or Drop Extensions
+
+To install a9s PostgreSQL extensions with the Cloud Foundry CLI and additional configuration parameters, run the following commands:
 
 ```bash
 $ cf create-service a9s-postgresql PLAN_NAME INSTANCE_NAME -c '{"install_plugins": ["<plugin_name>"]}'
@@ -362,7 +332,7 @@ $ cf update-service INSTANCE_NAME -c '{"install_plugins": ["<plugin_name>]}'
 $ cf update-service INSTANCE_NAME -c '{"delete_plugins": ["<plugin_name>]}'
 ```
 
-#### Available Extensions
+#### <a id='available-extenstions'></a> Available Extensions
 
 The following a9s PostgreSQL extensions are available:
 
@@ -372,35 +342,31 @@ The following a9s PostgreSQL extensions are available:
 * pgcrypto
 * citext
 
-#### Default Extensions
+#### <a id='default-extensions'></a> Default Extensions
 
-There are a9s PostgreSQL extensions that are always installed and it's also not possible to delete them.
-The following a9s PostgreSQL extensions are set as default extensions:
+Some a9s PostgreSQL extensions are always installed and cannot be deleted. The following a9s PostgreSQL extensions are set as default extensions:
 
 * pgcrypto
 * citext
 
-These two extensions are needed to have a functional replication.
+These two extensions are necessary for a functional replication.
 
-## a9s PostgreSQL Custom Parameters
 
-As an end user you have the opportunity to customize your service instance by using custom parameters.
+## <a id='a9s-postgresql-custom-parameters'></a> a9s PostgreSQL Custom Parameters
+
+As an end user, you have the ability to customize your service instance by using custom parameters.
 Custom parameters are passed on to a service instance by using the `-c` switch of the cf CLI commands `cf create-service`
-and `cf update-service`. For example
-```
-cf update-service mypg -c '{"max_connections": "100"}'
-```
-would set the maximum number of concurrent connections to 100 for the service instance `mypg`.
+and `cf update-service`. For example, running `cf update-service mypg -c '{"max_connections": "100"}'` would set the maximum number of concurrent connections to 100 for the service instance `mypg`.
 
-You don't have to utilize those settings. There are sane defaults in place that fit your service plan well.
+You are not required to utilize these settings.
 
 Every parameter corresponds to a property in the configuration file for the respective a9s PostgreSQL version.
 
-### max_connections
+### <a id='max_connections'></a> max_connections
 
 Determines the [maximum number of concurrent connections](https://www.postgresql.org/docs/10/static/runtime-config-connection.html) to the database server.
 
-The default in the service plans of anynines-deployment is as follows:
+The default in the service plan of an anynines deployment is as follows:
 
 | Plan  | Max Connections   |
 |-------|:-----------------:|
@@ -410,48 +376,43 @@ The default in the service plans of anynines-deployment is as follows:
 
 An integer value greater than 10 is expected.
 
-### effective_cache_size
+### <a id='effective_cache_size'></a> effective_cache_size
 
 [Sets the planner's assumption about the effective size of the disk cache that is available to a single query.](https://www.postgresql.org/docs/10/static/runtime-config-query.html#GUC-EFFECTIVE-CACHE-SIZE)
 
-Please note, that our BOSH release includes an algorithm which calculates a usable value for this property on the fly based on the ressources of the VM running.
+<p class='note'></a> Our BOSH release includes an algorithm that calculates a usable value for this property on the fly based on the resources of the VM running.</p>
 
-The property effective_cache_size can be specified (e.g. '2GB') or be
-ommited. If effective_cache_size is not set, it's value is 75% of the total memory.
-If the total memory is less than 4GB, it will use 50% of the total memory
-with a floor of 256MB. When specifying this value make sure you set a value that
-leads to a configuration that is higher than shared_buffers because shared buffers
-are included in the a9s PostgreSQL query execution planner.
+The `effective_cache_size` property can be specified (e.g. '2GB') or omitted. If `effective_cache_size` is not set, its value is 75% of the total memory.
+If the total memory is less than 4&nbsp;GB, it will use 50% of the total memory with a floor of 256&nbsp;MB. When specifying this value, make sure you set a value that leads to a configuration that is higher than `shared_buffers`, because shared buffers are included in the a9s PostgreSQL query execution planner.
 
 An integer value greater than 0 is expected.
 
-### shared_buffers
+### <a id='shared_buffers'></a> shared_buffers
 
 [Sets the amount of memory the database server uses for shared memory buffers.](https://www.postgresql.org/docs/10/static/runtime-config-resource.html)
 
-The property shared_buffers can be specified (e.g. '2048MB') or be ommited
-If shared_buffers is not set, its value is 25% of the total memory,
-if the total memory if greater than 1GB and 15% if less with a floor of 128MB.
+The `property shared_buffers` can be specified (e.g. '2048MB') or omitted. If `shared_buffers` is not set, its value is 25% of the total memory, if the total memory is greater than 1&nbsp;GB and 15% or less with a floor of 128&nbsp;MB.
 
 An integer value greater than 0 is expected.
 
-### work_mem
+### <a id='work_mem'></a> work_mem
 
 [Specifies the amount of memory to be used by internal sort operations and hash tables before writing to temporary disk files.](https://www.postgresql.org/docs/10/static/runtime-config-resource.html)
 
-An integer value greater than 0 is expected. The default is 8MB for anynines-deployment plans.
+An integer value greater than 0 is expected. The default is 8&nbsp;MB for anynines deployment plans.
 
-### temp_file_limit
+### <a id='temp_file_limit'></a> temp_file_limit
 
 [Specifies the maximum amount of disk space that a process can use for temporary files, such as sort and hash temporary files, or the storage file for a held cursor.](https://www.postgresql.org/docs/10/static/runtime-config-resource.html)
 
-An integer value greater than 0 is expected. Alternatively "-1" means "no limit". The default value is "-1".
+An integer value greater than 0 is expected. Alternatively, "-1" means "no limit". The default value is "-1".
 
-## Create a fork of a service instance
 
-The procedure of forking a service instance involves creating a backup of a service instance, modifying the backup a bit and restoring it to a different service instance.
+## <a id='create-a-fork-of-a-service-instance'></a> Create a Fork of a Service Instance
 
-Having two service instances is a prerequisite for the process:
+Forking a service instance involves creating a backup of a service instance, modifying the backup, and restoring it to a different service instance.
+
+1. Ensure you have two service instances:
 ```shell
 $ cf s
 Getting services in org my_org / space my_space as user@domain.com...
@@ -461,8 +422,7 @@ psql1   a9s-postgresql94   postgresql-replica-small                create succee
 psql2   a9s-postgresql94   postgresql-replica-small                create succeeded
 ```
 
-Having a service key for each of the service instances comes in handy later when we need info about the database and credentials to connect to the database. Create one for each service instance using e.g.: `cf create-service-key psql1 mykey`.
-You can then have a look at the keys contents:
+1. Create a service key for each service instance by running `cf create-service-key psql1 mykey`. You can then look at the key's contents:
 ```shell
 $ cf service-key psql1 mykey
 Getting key mykey for service instance psql1 as user@domain.com...
@@ -497,9 +457,7 @@ Getting key mykey for service instance psql2 as user@domain.com...
  "username": "a9suser"
 }
 ```
-
-We need the database names for later use as well as the credentials for psql2. The database name is the trailing part of the URI. For `psql1` the database name is `pcsd85301a` and for `psql2` the database name is `pcsd59c00c`
-
+You need the database names for later use, as well as the credentials for `psql2`. The database name is the trailing part of the URI. For `psql1`, the database name is `pcsd85301a`. For `psql2`, the database name is `pcsd59c00c`.
 Additional prerequisites regarding command line tools:
 - BASH (some shell)
 - cat
@@ -507,7 +465,7 @@ Additional prerequisites regarding command line tools:
 - openssl
 - psql (the command line client for psql)
 
-Open the service dashboard of the service instance you want to fork. We use `psql1` for this example. You can find the dashboard URL like this:
+1. Open the service dashboard of the service instance you want to fork, as in the `psql1` example. You can find the dashboard URL by running the following command:
 ```shell
 $ cf service psql1
 Showing info of service psql1 in org my_org / space my_space as user@domain.com...
@@ -524,25 +482,27 @@ dashboard:       https://a9s-postgresql-dashboard.de.a9s.eu/service-instances/27
 [...]
 ```
 
-Make sure you set a encryption password for the backups using the service instance dashboard (`Change Backup Settings`). Create a backup using the dashboard. Download the backup to your local machine. The filename will be something like `racsd92baee-1522222422893`.
-Decrypt the backup and write its contents to a file:
+1. Click **Change Backup Settings** in the service instance dashboard to set an encryption password.
+  
+1. Create a backup using the dashboard and download the backup to your local machine. The filename will be something like `racsd92baee-1522222422893`.
+
+1. Decrypt the backup and write its contents to a file:
 ```shell
 $ cat racsd92baee-1522222422893 | openssl enc -aes256 -d -pass 'pass:mytopsecretpassword' > backup.sql
 ```
 
-We have to replace the database name of the original instance in the backup with the database name of the other instance:
+1. Replace the database name of the original instance in the backup with the database name of the other instance:
 ```shell
 $ cat backup.sql | sed -e 's/pcsd85301a/pcsd59c00c/g' > backup.fork.sql
 ```
 
-Create a tunnel to the admin interface (like explained in a previous chapter) of the a9s PostgreSQL instance that will be the fork of the original instance. I used psql1 as the original instance and psql2 as the fork instance.
-I assume you're using something like this to set up the tunnel to psql2:
+1. Create a tunnel to the admin interface of the a9s PostgreSQL instance forked from the original instance.
 ```shell
 $ cf ssh someapp -L 127.0.0.1:15672:racsd92baee.service.dc1.a9ssvc:15672
 ```
 
-Finally restore the data:
+1. Restore the data:
 ```shell
 psql -h 127.0.0.1 -p 5432 -U a9s27ae5c9bfee2937a8dc04b1d7d9b9c9690c97704 pcsd59c00c &lt; backup.fork.sql
 ```
-Don't get confused if you see error messages. The backup contains data that we lack the necessary permissions to restore. In the end our data gets restored and that's our primary goal.
+<p class='note'><strong>Note:</strong> You may see error messages during this procedure. The backup contains data that you lack the necessary permissions to restore, but your data will still be restored.</p>
