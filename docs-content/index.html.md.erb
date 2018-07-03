@@ -10,12 +10,11 @@ This documentation describes the a9s PostgreSQL for Pivotal Cloud Foundry (PCF) 
 ## <a id='overview'></a>Overview
 
 a9s PostgreSQL for PCF enables on-demand provisioning of VM-based, dedicated PostgreSQL servers and clusters.<br />
-a9s PostgreSQL for PCF is part of a number of a9s Data Services available in one Bundle. Visit the<a href="https://www.anynines.com/" target="_blank">anynines website</a> for more details. Developers can create instances of a PostgreSQL server or cluster using Apps Manager
-or the Cloud Foundry Command Line interface (cf CLI), and bind these instances to an application.
+a9s PostgreSQL for PCF is part of a number of a9s Data Services available in one Bundle. Visit the [anynines website](https://www.anynines.com/) for more information. Developers can create instances of a PostgreSQL server or cluster using Apps Manager or the Cloud Foundry Command Line interface (cf CLI), and bind these instances to an application.
 Depending on the chosen service plan, a service instance may be associated with a single, dedicated virtual machine,
 or a set of VMs consisting of multiple virtual machines comprising a cluster of PostgreSQL servers.
 
-### <a id="current"></a>Current Features
+### <a id="current"></a> Current Features
 
 a9s PostgreSQL for PCF includes the following key features:
 
@@ -26,7 +25,7 @@ a9s PostgreSQL for PCF includes the following key features:
  <td>On&dash;demand Service Instance Provisioning</td>
  <td>
    <ul>
-     <li>Fully automated deployment of PostgreSQL. Developers can provision a single-VM PostgreSQL server or a multi-VM PostgreSQL cluster with a single command.</li>
+     <li>Fully-automated deployment of PostgreSQL. Developers can provision a single-VM PostgreSQL server or a multi-VM PostgreSQL cluster with a single command.</li>
      <li>Only existing service instances allocate infrastructure resources, which are released when you delete the service instance.</li>
      <li>The number of service instances is not limited by design.</li>
    </ul>
@@ -52,7 +51,7 @@ a9s PostgreSQL for PCF includes the following key features:
 </tr>
 <tr>
 <td>Smoke Tests</td>
-<td>a9s PostgreSQL for PCF contains a post-deploy smoke tests errand that runs a series of basic tests against your installation to ensure that it is configured properly.</td>
+<td>a9s PostgreSQL for PCF contains a post-deploy smoke test errand that runs a series of basic tests against your installation to ensure that it is configured properly.</td>
 </tr>
 <tr>
 <td>Syslog streaming</td>
@@ -87,7 +86,7 @@ a9s PostgreSQL for PCF includes the following key features:
 </tr>
 </table>
 
-### <a id='video'></a>Video Overview of a9s PostgreSQL for PCF
+### <a id='video'></a> Video Overview of a9s PostgreSQL for PCF
 
 The following video provides an overview of how a9s PostgreSQL for PCF works.
 
@@ -97,7 +96,9 @@ The following video provides an overview of how a9s PostgreSQL for PCF works.
 </p>
 
 
-## <a id="snapshot"></a>Product Snapshot
+## <a id="snapshot"></a> Product Snapshot
+
+<p class='note'><strong>Note:</strong> As of PCF v2.0, Elastic Runtime is renamed Pivotal Application Service (PAS).</p>
 
 The following table provides version and version-support information about a9s PostgreSQL for PCF:
 
@@ -124,12 +125,12 @@ The following table provides version and version-support information about a9s P
  <td>IaaS support</td>
  <td>AWS, Azure, GCP, OpenStack, and Vsphere</td>
  </tr>
-</table>
-\* As of PCF v2.0, <em>Elastic Runtime</em> is renamed <em>Pivotal Application Service (PAS)</em>. 
+</table> 
 
-* This is a major release. Upgrades from a9s PostgreSQL for PCF v1.x are not supported. If you previously installed a9s PostgreSQL for PCF v1.x, uninstall it and install the latest version
+<p class='note'><strong>Note:</strong> This is a major release. Upgrades from a9s PostgreSQL for PCF v1.x are not supported. If you previously installed a9s PostgreSQL for PCF v1.x, uninstall it and install the latest version.</p>
 
-## <a id="reqs"></a>Requirements
+
+## <a id="reqs"></a> Requirements
 
 To install and use a9s PostgreSQL for PCF, you must install the following products and tiles:
 
@@ -137,19 +138,16 @@ To install and use a9s PostgreSQL for PCF, you must install the following produc
 
 For more information, see [Installing and Configuring a9s PostgreSQL for PCF](./installing.html).
 
-## <a id="feedback"></a>Feedback and Support
 
-a9s PostgreSQL for PCF is an automation toolset for Open Source PostgreSQL.
-The entire anynines team can help your team get started and be successful.
-Technical support, including a service level agreement, is available with a commercial license.
+## <a id="feedback"></a> Feedback and Support
 
-If your company has specific PostgreSQL administration policies or configuration best practices, the anynines team is happy to incorporate them,
-if applicable.
-Third-party PostgreSQL support organizations are also welcome to assist.
+a9s PostgreSQL for PCF is an automation toolset for Open Source PostgreSQL. The entire anynines team can help your team get started and be successful. Technical support, including a service level agreement, is available with a commercial license.
 
-Contributions are welcome and will be investigated by the anynines team.
-Send any bugs, feature requests, or questions to <a href="mailto:dssupport@anynines.com">dssupport@anynines.com</a>.
+If your company has specific PostgreSQL administration policies or configuration best practices, the anynines team is happy to incorporate them, if applicable. Third-party PostgreSQL support organizations are also welcome to assist.
 
-## <a id='license'></a>License
+The anynines team welcomes any contributions. Send any bugs, feature requests, or questions to [dssupport@anynines.com](mailto:dssupport@anynines.com).
 
-Contact our <a href="mailto:dssupport@anynines.com">sales team</a> to learn more about commercial licenses and support.
+
+## <a id='license'></a> License
+
+Contact our [sales team](mailto:dssupport@anynines.com) to learn more about commercial licenses and support.
