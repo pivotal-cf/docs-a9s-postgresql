@@ -66,13 +66,24 @@ System-Provided:
   "a9s-postgresql": [
    {
     "credentials": {
-     "host": "EXAMPLE-HOST",
-     "hosts": ["EXAMPLE-HOST"],
-     "name": "d92e2bd",
-     "password": "EXAMPLE-PASSWORD",
-     "port": 5432,
-     "uri": "EXAMPLE-URI",
-     "username": "EXAMPLE-USERNAME"
+      "dns_servers": [
+       "172.28.10.22",
+       "172.28.11.11",
+       "172.28.12.11"
+      ],
+      "host": "d680893-psql-master-alias.node.dc1.a9s-postgresql-consul",
+      "host_ip": "172.28.25.12",
+      "host_ips": [
+       "172.28.25.12"
+      ],
+      "hosts": [
+       "d680893-pg-0.node.dc1.a9s-postgresql-consul"
+      ],
+      "name": "d680893",
+      "password": "a9s-password",
+      "port": 5432,
+      "uri": "postgres://a9s-usr:a9s-password@d680893-psql-master-alias.node.dc1.a9s-postgresql-consul:5432/d680893",
+      "username": "a9s-usr"     },
     },
     "label": "a9s-postgresql",
     "name": "my-postgresql-service",
@@ -88,7 +99,10 @@ System-Provided:
 ...
 ```
 
-You can use the host, username and password values to connect to your database with a a9s PostgreSQL client.
+You can use the host_ips, username and password values to connect to your database with a PostgreSQL client.
+
+a9s PostgreSQL for PCF comes with its own Consul cluster to provide hostname resolving. When your DNS is configured to resolve the a9s PostgreSQL for PCF service instance domains you can make use of `hosts` or `uri`.
+For more information see <a href="./installing.html#name-resolving-with-consul" target="_blank">Name Resolving With Consul</a>.
 
 
 ## <a id='delete-an-a9s-postgresql-service-instance'></a> Delete an PostgreSQL Service Instance
@@ -143,9 +157,20 @@ $ cf update-service my-postgresql-service -p a-bigger-plan
 
 Here are the plans you can upgrade to, depending on the one you are currently using:
 
-* If you are currently using the `postgresql-single-small` plan, you can upgrade to the `postgresql-single-big` plan.
-* If you are currently using the `postgresql-cluster-small` plan, you can upgrade to the `postgresql-cluster-big` plan.
-
+| Base Plan | Target Plan |
+|------|-----------|
+| postgresql-single-nano | postgresql-single-small <br> postgresql-single-medium <br> postgresql-single-big <br> postgresql-replica-small <br> postgresql-replica-medium <br> postgresql-replica-big |
+| postgresql-single-small | postgresql-single-medium <br> postgresql-single-big <br> postgresql-replica-small <br> postgresql-replica-medium <br> postgresql-replica-big |
+| postgresql-single-medium | postgresql-single-big <br> postgresql-replica-medium <br> postgresql-replica-big |
+| postgresql-single-big | postgresql-replica-big |
+| postgresql-replica-small | postgresql-replica-medium <br> postgresql-replica-big |
+| postgresql-replica-medium | postgresql-replica-big |
+| postgresql-single-nano-ssl | postgresql-single-small-ssl <br> postgresql-single-medium-ssl <br> postgresql-single-big-ssl <br> postgresql-replica-small-ssl <br> postgresql-replica-medium-ssl <br> postgresql-replica-big-ssl |
+| postgresql-single-small-ssl | postgresql-single-medium-ssl <br> postgresql-single-big-ssl <br> postgresql-replica-small-ssl <br> postgresql-replica-medium-ssl <br> postgresql-replica-big-ssl |
+| postgresql-single-medium-ssl | postgresql-single-big-ssl <br> postgresql-replica-medium-ssl <br> postgresql-replica-big-ssl |
+| postgresql-single-big-ssl | postgresql-replica-big-ssl |
+| postgresql-replica-small-ssl | postgresql-replica-medium-ssl <br> postgresql-replica-big-ssl |
+| postgresql-replica-medium-ssl | postgresql-replica-big-ssl |
 
 ## <a id='add-a-graphite-endpoint'></a> Add a Graphite Endpoint
 
@@ -286,15 +311,24 @@ System-Provided:
    "a9s-postgresql": [
     {
       "credentials": {
-       "host": "d67901c-psql-master-alias.node.dc1.consul",
-       "hosts": [
-        "d67901c-pg-0.node.dc1.consul",
-        "d67901c-pg-1.node.dc1.consul",
-        "d67901c-pg-2.node.dc1.consul"
-       ],
-       "password": "a9s-brk-usr",
-       "username": "a9s-password"
-     },
+        "dns_servers": [
+         "172.28.10.22",
+         "172.28.11.11",
+         "172.28.12.11"
+        ],
+        "host": "d680893-psql-master-alias.node.dc1.a9s-postgresql-consul",
+        "host_ip": "172.28.25.12",
+        "host_ips": [
+         "172.28.25.12"
+        ],
+        "hosts": [
+         "d680893-pg-0.node.dc1.a9s-postgresql-consul"
+        ],
+        "name": "d680893",
+        "password": "a9s-password",
+        "port": 5432,
+        "uri": "postgres://a9s-usr:a9s-password@d680893-psql-master-alias.node.dc1.a9s-postgresql-consul:5432/d680893",
+        "username": "a9s-usr"     },
      "label": "a9s-postgresql",
      "name": "my-postgresql-service",
      "plan": "postgresql-cluster-small"
@@ -485,7 +519,7 @@ dashboard:       https://a9s-postgresql-dashboard.de.a9s.eu/service-instances/27
 ```
 
 1. Click **Change Backup Settings** in the service instance dashboard to set an encryption password.
-  
+
 1. Create a backup using the dashboard and download the backup to your local machine. The filename will be something like `racsd92baee-1522222422893`.
 
 1. Decrypt the backup and write its contents to a file:
