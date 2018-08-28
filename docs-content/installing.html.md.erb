@@ -70,6 +70,13 @@ This has no effect on the service instances itself.
 
 <%= image_tag("syslog.png") %>
 
+###<a id="service_configuration"></a>Service Configuration
+
+At this page a default endpoint for graphite and syslog can be configured. This endpoints can not be deleted or updated by the user.
+F.e. `logs.papertrail.com:44456` for syslog.
+
+<%= image_tag("service_configuration.png") %>
+
 ### <a id='errands'></a> Configure Errands
 
 Use **Errands** to configure the lifecycle errands that run when you install or uninstall a9s PostgreSQL for PCF. The list below describes each errand. For more information, see [Understanding Lifecycle Errands](https://docs.pivotal.io/tiledev/tile-errands.html).
@@ -127,7 +134,7 @@ Logged in as 'director'
 <pre class="terminal">
 $ bosh deployments
 Using environment '172.28.10.11' as client 'ops_manager'
-  
+
 Name                                 Release(s)                            Stemcell(s)                                       Team(s)                              Cloud Config
 a9s-postgresql-94443f82b52dcf333bbd  a9s-consul/18                         bosh-vsphere-esxi-ubuntu-trusty-go_agent/3468.25  -                                    latest
                                      ...
