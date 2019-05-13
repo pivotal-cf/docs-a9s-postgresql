@@ -380,8 +380,8 @@ configuration parameters, run the following commands:
 
 ```bash
 $ cf create-service a9s-postgresql PLAN_NAME INSTANCE_NAME -c '{"install_plugins": ["<plugin_name>"]}'
-$ cf update-service INSTANCE_NAME -c '{"install_plugins": ["<plugin_name>]}'
-$ cf update-service INSTANCE_NAME -c '{"delete_plugins": ["<plugin_name>]}'
+$ cf update-service INSTANCE_NAME -c '{"install_plugins": ["<plugin_name>"]}'
+$ cf update-service INSTANCE_NAME -c '{"delete_plugins": ["<plugin_name>"]}'
 ```
 
 #### <a id='available-extenstions'></a> Available Extensions
