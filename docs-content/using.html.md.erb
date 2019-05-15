@@ -414,11 +414,9 @@ by using the `-c` switch of the cf CLI commands `cf create-service` and
 `cf update-service`. For example
 
 ```bash
-cf update-service mypg -c '{"max_connections": "100"}'
+cf update-service mypg -c '{"temp_file_limit": "-1"}'
 ```
-
-would set the maximum number of concurrent connections to 100 for the service
-instance `mypg`.
+would set the temporary file limit to unlimited for the service instance `mypg`.
 
 <p class="note"><strong>Note:</strong> You don't have to utilize those settings.
 There are sane defaults in place that fit your service plan well.</p>
@@ -431,7 +429,9 @@ PostgreSQL version.
 Determines the
 [maximum number of concurrent connections](https://www.postgresql.org/docs/10/static/runtime-config-connection.html)
 to the database server.
-&nbsp;
+
+<p class="note"><strong>Note:</strong> You cannot decrease `max_connections` as this will break clustering.</p>
+
 The default behaviour for all a9s PostgreSQL versions is to calculate the number of
 `max_connections` automatically based on the size of `shared_buffers` and `work_mem`
 with the following formula:
