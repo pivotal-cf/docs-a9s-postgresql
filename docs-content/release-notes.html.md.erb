@@ -5,7 +5,86 @@ owner: Partners
 
 ## Provided PostgreSQL Versions
 
-PostgreSQL v10.7 and v9.4.21
+PostgreSQL v10.10 and v9.4.24
+
+## <a id="2-1-3"></a> v2.1.3
+
+**Release Date:** September 6, 2019
+
+***Added***
+
+- a9s PostgreSQL: Documentation about the primary alias monitor.
+- a9s Router: adds a9s Router service as a needed dependency for K8S deployments in future
+- a9s Dashboard API: Add endpoint to prepare a disaster recovery for a given
+  service instance.
+- all services: a9s Deployer: Use deployment name to create and find a deployment.
+- a9s Backup Service: The backup create request now returns also the id of the backup.
+
+***Fixed***
+
+- a9s PostgreSQL: Fix `work_mem` custom paramter. Fix the documentation
+  regarding the base unit for `work_mem` which is kilobytes when you specify an integer.
+- a9s PostgreSQL: The function `pg_stat_statements_reset` can be used by the
+  binding credentials.
+- a9s PostgreSQL: a9s Service Dashboard: Point In Time Recovery is displayed on
+  a9s Service Dashboard correctly after updating the service instance.
+- all services: a9s Service Dashboard API: Creation date of a backup in the
+  restore view gets shown properly.
+- a9s PostgreSQL: Improve PostgreSQL startup process to avoid removing data while
+  the primary is not reachable.
+- all services: a9s Dashboard API: error message for encryption keys that are too short shows up again
+  or used.
+- all services: a9s Dashboard App: Updates `lodash` to version `4.17.14` to
+  resolve CVE.
+- all services: a9s Service Dashboard: Updates `node` version to `10.16`.
+- all services: a9s Backup Agent: Fix multipart upload.
+- a9s SSO Proxy: Added OAuth usage for POST, PATCH, PUT and DELETE methods.
+- all services: a9s Deployer: The a9s Deployer now properly catches and saves
+  the return values from the BOSH Director in case the BOSH Task fails.
+  Fetching instance information now properly returns the instance data with a
+  `failed` status instead of `422`.
+- a9s Backup Service: Fix migration of encryption key into a new column for
+  shorter encryption keys than the current limit.
+- a9s Backup Manager: Fix an issue where under special circumstances the backup
+  encryption key is not stored in the database.
+- a9s Backup Manager: Move database migration into a pre-start script to
+  mitigate timeout issue with the start script.
+- a9s Dashboard API: Replaced logger to redact sensitive data in logs.
+- a9s SSO-Proxy: The SSO-Proxy application returns now the HTTP Code
+  `401 unauthorized` if the CF Auth Token is expired or invalid.
+- all services: a9s Dashboard API: solve open CVE by updating the corresponding
+  libraries `eslint`, `shelljs`, `diff`, `express-basic-auth`, `lodash` and
+  `growl`.
+
+***Updated***
+
+- Stemcell: Update to BOSH stemcell version 315.x.
+- all services: a9s Service Broker: Using deployment name instead of deployment
+  id for the communication with the a9s BOSH Deployer.
+- all services: a9s BOSH Deployer: Use deployment names instead of deployment
+  ids in the outdated endpoint.
+- a9s PostgreSQL: PostgreSQL 11.5, PostgreSQL 10.10 and PostgreSQL 9.4.24
+- all services: a9s Service Dashboard: Replace AngularJS with React. In this
+  context we improved the UI of the a9s Service Dashboard. Please refer to the
+  [a9s Service Dashboard documentation](./a9s-service-dashboard.html)
+  for more details.
+- all services: a9s Service Dashboard: Improved the datetime picker for PITR.
+- all services: a9s Service Dashboard: Per default deleted backups are not
+  displayed in the a9s Service Dashboard anymore.
+- all services: a9s Backup-Agent: Improve backup mechanism for backups bigger
+  than 1 GB and improve restore.
+  that new CA on the next update operation. You can use the deployment updater to update existing service instances.
+- all services: a9s Service Broker: The a9a Service Broker requests
+  `available_updates` from the a9s Deployer only when the information is needed.
+- a9s PostgreSQL: setting PostgreSQL's `hot_standby_feedback` to `on` by
+  default. In the future we might make it a custom paramter.
+- a9s Backup Service: Now the Backup Service can handle precise start and end time for
+  continuous archiving.
+- a9s PostgreSQL: postgresql-info-webservice's value for the BOSH property `http_password`
+  is now generated randomly. Old instances are not affected, so the password stays the same.
+- a9s PostgreSQL: Primary alias monitoring is now enabled by default.
+- a9s PostgreSQL: Makes continuous archiving start and end time precise,
+  with `file_created_at` based on the WAL file content.
 
 ## <a id="2-1-2"></a> v2.1.2
 
@@ -131,7 +210,7 @@ bootstrap to 4.3.1
   from Diego cells.
 * A backup option is added for a9s-pg.
 * a9s PostgreSQL now supports instance sharing between orgs an spaces,
-  see [documentation](https://docs.pivotal.io/pivotalcf/2-4/devguide/services/sharing-instances.html).
+  see [documentation](https://docs.pivotal.io/pivotalcf/2-6/devguide/services/sharing-instances.html).
 * Upgrades the stemcell to Ubuntu Xenial.
 
 ## <a id="2-0-2"></a> v2.0.2
