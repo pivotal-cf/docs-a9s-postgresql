@@ -1,23 +1,23 @@
 ---
-title: a9s PostgreSQL for PCF
+title: a9s PostgreSQL for Pivotal Platform
 owner: Partners
 ---
 
-This documentation describes the a9s PostgreSQL for Pivotal Cloud Foundry (PCF)
-tile. a9s PostgreSQL for PCF enables on-demand provisioning of VM-based, dedicated
+This documentation describes the a9s PostgreSQL for Pivotal Platform
+tile. a9s PostgreSQL for Pivotal Platform enables on-demand provisioning of VM-based, dedicated
 PostgreSQL servers and clusters. Developers can create instances of a PostgreSQL
 server or cluster using Apps Manager or the Cloud Foundry Command Line interface
 (cf CLI) and bind these instances to an application. Depending on your service
 plan, a service instance may be associated with a single, dedicated VM or a set
 of VMs consisting of multiple VMs containing a PostgreSQL cluster.
 
-![a9s PostgreSQL for PCF logo](a9s-postgresql.png)
+![a9s PostgreSQL for Pivotal Platform logo](a9s-postgresql.png)
 
 ## <a id='overview'></a>Overview
 
-a9s PostgreSQL for PCF enables on-demand provisioning of VM-based, dedicated
+a9s PostgreSQL for Pivotal Platform enables on-demand provisioning of VM-based, dedicated
 PostgreSQL servers and clusters.<br />
-a9s PostgreSQL for PCF is part of a number of a9s Data Services available in one
+a9s PostgreSQL for Pivotal Platform is part of a number of a9s Data Services available in one
 Bundle. Visit the [anynines website](https://www.anynines.com/) for more information.
 Developers can create instances of a PostgreSQL server or cluster using Apps
 Manager or the Cloud Foundry Command Line interface (cf CLI), and bind these
@@ -33,18 +33,18 @@ individual infrastructure hosts or entire availability zones.
 
 ### <a id="current"></a> Current Features
 
-a9s PostgreSQL for PCF includes the following key features:
+a9s PostgreSQL for Pivotal Platform includes the following key features:
 
 | Feature | Benefit |
 |---------|---------|
-| **On-Demand Service Instance Provisioning** | a9s PostgreSQL for PCF deploys PostgreSQL instances automatically. Developers can provision a single VM PostgreSQL server or a multi VM PostgreSQL using a single command. |
-| **Service Instance Isolation** | Each PostgreSQL server runs on a dedicated VM to ensure bad neighborhood protection in order to be aligned with enterprise security requirements.<br/><br/>a9s PostgreSQL for PCF uses Cloud Foundry security groups to prevent network connections being established by unauthorized apps.
-| **High Availability** | The <a href="http://repmgr.org/">Replication Manager for PostgreSQL</a> ensures high availability. <br/> Consul-based internal DNS delivered by a9s Consul DNS for PCF ensures that the connected app always connects to a working node. <br /> The clustered data service plans are spread across several infrastructure availability zones, which enables very short failover times and a strong resilience of individual infrastructure hosts or even entire availability zones. |
-| **Smoke Tests** | a9s PostgreSQL for PCF contains a post-deploy smoke test errand that runs a series of basic tests against your installation to ensure that it is configured properly.|
-| **Syslog streaming** | a9s PostgreSQL for PCF provides the possibility to stream the logs of each a9s PostgreSQL for PCF component to a sys log endpoint.|
+| **On-Demand Service Instance Provisioning** | a9s PostgreSQL for Pivotal Platform deploys PostgreSQL instances automatically. Developers can provision a single VM PostgreSQL server or a multi VM PostgreSQL using a single command. |
+| **Service Instance Isolation** | Each PostgreSQL server runs on a dedicated VM to ensure bad neighborhood protection in order to be aligned with enterprise security requirements.<br/><br/>a9s PostgreSQL for Pivotal Platform uses Cloud Foundry security groups to prevent network connections being established by unauthorized apps.
+| **High Availability** | The <a href="http://repmgr.org/">Replication Manager for PostgreSQL</a> ensures high availability. <br/> Consul-based internal DNS delivered by a9s Consul DNS for Pivotal Platform ensures that the connected app always connects to a working node. <br /> The clustered data service plans are spread across several infrastructure availability zones, which enables very short failover times and a strong resilience of individual infrastructure hosts or even entire availability zones. |
+| **Smoke Tests** | a9s PostgreSQL for Pivotal Platform contains a post-deploy smoke test errand that runs a series of basic tests against your installation to ensure that it is configured properly.|
+| **Syslog streaming** | a9s PostgreSQL for Pivotal Platform provides the possibility to stream the logs of each a9s PostgreSQL for Pivotal Platform component to a sys log endpoint.|
 | **Service Instance Capacity Upgrade** | Cloud Foundry Service Plan updates allow upgrades to the RAM, CPU, and storage capacity for your PostgreSQL instances.|
 | **Logging and Monitoring** | Each PostgreSQL service instance provides log messages and PostgreSQL-specific metrics to one or more `syslog/graphite` endpoints. You can configure the `syslog/graphite` endpoint to receive logging and monitoring information.|
-| **Deployment Updater** | This errand automatically updates the stemcell and all provisioned a9s PostgreSQL for PCF service instances to their lastest version.|
+| **Deployment Updater** | This errand automatically updates the stemcell and all provisioned a9s PostgreSQL for Pivotal Platform service instances to their lastest version.|
 | **Backup Manager** | The Backup Manager makes a regular backup of your instances and offers endpoints to backup instantly and restore backups.|
 | **Service Dashboard** | The Service Dashboard provides a single sign on and lets the user trigger easily backups.|
 | **Service Guard** | The Service Guard creates Cloud Foundry security groups for your service instance VMs.<br /><br /> When the IP address of a service instance changes, the guard updates the security group. |
@@ -55,9 +55,9 @@ a9s PostgreSQL for PCF includes the following key features:
 | **Instance Sharing** | a9s PostgreSQL no supports instance sharing between orgs an spaces, see [documentation](https://docs.pivotal.io/pivotalcf/2-6/devguide/services/sharing-instances.html).|
 | **Update to Xenial** | Upgrades the stemcell to Ubuntu Xenial. |
 
-### <a id='video'></a> Video Overview of a9s PostgreSQL for PCF
+### <a id='video'></a> Video Overview of a9s PostgreSQL for Pivotal Platform
 
-The following video provides an overview of how a9s PostgreSQL for PCF works.
+The following video provides an overview of how a9s PostgreSQL for Pivotal Platform works.
 
 <p>
   <iframe src="https://www.youtube.com/embed/3UfxmDGUGy0"
@@ -67,7 +67,7 @@ The following video provides an overview of how a9s PostgreSQL for PCF works.
 
 ## <a id="snapshot"></a> Product Snapshot
 
-The following table provides version and version-support information about a9s PostgreSQL for PCF:
+The following table provides version and version-support information about a9s PostgreSQL for Pivotal Platform:
 
 <table class="nice">
     <th>Element</th>
@@ -103,28 +103,28 @@ The following table provides version and version-support information about a9s P
 </table>
 
 <p class="note warning"><strong> WARNING:</strong>
-a9s PostgreSQL for PCF v2.0.2
+a9s PostgreSQL for Pivotal Platform v2.0.2
 and earlier require a Ubuntu Trusty stemcell.
 The end-of-life date for Ubuntu Trusty is April 2019.
 If a security vulnerability is found on this stemcell after April, it will not be fixed.</p>
 
 <p class='note'><strong>Note:</strong> Upgrades from a9s
-PostgreSQL for PCF v1.x are not supported. If you previously installed a9s
-PostgreSQL for PCF v1.x, uninstall it and install the latest version.</p>
+PostgreSQL for Pivotal Platform v1.x are not supported. If you previously installed a9s
+PostgreSQL for Pivotal Platform v1.x, uninstall it and install the latest version.</p>
 
 
 ## <a id="reqs"></a> Requirements
 
-To install and use a9s PostgreSQL for PCF, you must install the following products and tiles:
+To install and use a9s PostgreSQL for Pivotal Platform, you must install the following products and tiles:
 
 * Pivotal Application Service (formerly Elastic Runtime) v2.1 or later
 
-For more information, see [Installing and Configuring a9s PostgreSQL for PCF](./installing.html).
+For more information, see [Installing and Configuring a9s PostgreSQL for Pivotal Platform](./installing.html).
 
 
 ## <a id="feedback"></a> Feedback and Support
 
-a9s PostgreSQL for PCF is an automation toolset for Open Source PostgreSQL. The
+a9s PostgreSQL for Pivotal Platform is an automation toolset for Open Source PostgreSQL. The
 entire anynines team can help your team get started and be successful. Technical
 support, including a service level agreement, is available with a commercial license.
 

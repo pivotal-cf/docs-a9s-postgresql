@@ -1,5 +1,5 @@
 ---
-title: a9s PostgreSQL for PCF Release Notes
+title: a9s PostgreSQL for Pivotal Platform Release Notes
 owner: Partners
 ---
 
@@ -144,7 +144,7 @@ bootstrap to 4.3.1
   occurs during the execution.
 * a9s Service Broker: Fix database migration if service instances
   are being provisioned/updated during migration.
-* a9s Deployer: BOSH client has no sufficient rights to read BOSH configs within PCF.
+* a9s Deployer: BOSH client has no sufficient rights to read BOSH configs within Pivotal Platform.
 
 **Updated**
 
@@ -181,7 +181,7 @@ bootstrap to 4.3.1
 * Service Dashboard: Optimize communication with a9s Service Broker.
 * Logstash: Configure Logstash to watch the a9s Parachute path too.
 * a9s Consul: Register consul agent as BOSH DNS handler entry instead of adding
-  as resolver when using within PCF tiles.
+  as resolver when using within Pivotal Platform tiles.
 * Use timeout when connecting to service instances with the PostgreSQL SPI.
 * a9s PostgreSQL: PostgreSQL 10.7 and PostgreSQL 9.4.21
 * all services: remove recreate and restart button from dashboard
@@ -219,7 +219,7 @@ bootstrap to 4.3.1
 
 * On premise S3 endpoints for backup
 * Adds default syslog and Graphite endpoints for service instances
-* Compatible with PCF v2.2 and later
+* Compatible with Pivotal Platform v2.2 and later
 
 ## <a id="2-0-1"></a> v2.0.1
 
@@ -228,7 +228,7 @@ bootstrap to 4.3.1
 * Adds Service Dashboard that allows the enduser to trigger and restore backups itself.
 * Adds PostgreSQL v10.4
 * Allow installation of PostgreSQL extensions
-* Compatible with PCF v1.12 and later
+* Compatible with Pivotal Platform v1.12 and later
 
 
 ## <a id="1-1-0"></a> v1.1.0
@@ -259,17 +259,17 @@ Features included in this release:
 
 * Service Instance Capacity Upgrade
 * Logging and Monitoring
-* Removed stemcell from tile to the a9s Bosh for PCF tile
-* Remove restriction to have three availability zones configured in the a9s Bosh for PCF
+* Removed stemcell from tile to the a9s Bosh for Pivotal Platform tile
+* Remove restriction to have three availability zones configured in the a9s Bosh for Pivotal Platform
 
 
 ## <a id="0-9-0"></a> v0.9.0
 
 **Release Date:** December 9, 2016
 
-The a9s PostgreSQL for Pivotal Cloud Foundry (PCF) tile is based on a9s PostgreSQL,
+The a9s PostgreSQL for Pivotal Platform tile is based on a9s PostgreSQL,
 which was developed in 2014 and is tested on <a href="https://paas.anynines.com/" target="_blank">paas.anynines.com</a>.
-This release is marked as **Beta** because it represents the first PCF release.
+This release is marked as **Beta** because it represents the first Pivotal Platform release.
 
 Features included in this release:
 
